@@ -21,6 +21,7 @@
   },
   "homepage": "https://github.com/dennisfyren/template-webpack#readme",
   "devDependencies": {
+    "chart.js": "^4.5.1",
     "css-loader": "^7.1.4",
     "html-loader": "^5.1.0",
     "html-webpack-plugin": "^5.6.6",
