@@ -127,9 +127,20 @@ export const showWeather = (city) => {
     const toMs = Math.round(item.windspeed / 3.6);
     windspeed.textContent = (toMs * 100) / 100 + "m/s";
     downfall.textContent = `${item.snow}mm`;
-
+    const dateDay = new Date(item.dateTime);
+    const weekdays = [
+      "Sunday",
+      "Monday",
+      "Tuesday",
+      "Wednesday",
+      "Thursday",
+      "Friday",
+      "Saturday",
+    ];
+    const day = document.createElement("p");
+    day.textContent = weekdays[dateDay.getDay()];
     container.appendChild(icon);
-
+    container.appendChild(day);
     container.appendChild(date);
     container.appendChild(temp);
     container.appendChild(windspeed);
