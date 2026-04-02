@@ -1,0 +1,26 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>TempIT!</title>
+  <script defer src="main.js"></script></head>
+  <body>
+    <div id="header">
+      <h2>TempIT!</h2>
+      <div>
+        <input
+          type="text"
+          id="search-bar"
+          pattern="^[a-zA-ZÅÄÖåäö\s]+$"
+          placeholder="Enter a city..."
+        />
+        <button id="search">Search</button>
+      </div>
+    </div>
+    <div id="content">
+      <div id="weather-container"></div>
+    </div>
+    <div id="footer"></div>
+  </body>
+</html>
