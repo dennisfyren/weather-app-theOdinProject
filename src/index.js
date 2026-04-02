@@ -1,5 +1,8 @@
-import { search } from "./searchbar.js";
+import { search } from "./searchBar.js";
 import "./styles.css";
+import bgImage from "./resources/pexels-jplenio-3131634.jpg";
+
+export default bgImage;
 
 const searchButton = document.querySelector("#search");
 

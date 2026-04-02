@@ -13,8 +13,16 @@ body {
     "header header header"
     "main main main"
     "footer footer footer";
-  background-color: rgb(156, 215, 243);
+  /* background-color: rgb(156, 215, 243); */
+  background-image: url("./resources/pexels-jplenio-3131634.jpg");
+  background-size: cover;
   font-family: "Montserrat", sans-serif;
+}
+h2,
+h3 {
+  color: rgb(253, 253, 253);
+  margin: 1rem 0 1rem 0;
+  font-size: 2rem;
 }
 #header {
   grid-area: header;
@@ -27,12 +35,13 @@ body {
   anchor-name: --search-bar;
 }
 input {
-  width: 20rem;
-  height: 2.5rem;
-  border-radius: 1rem;
+  width: 30rem;
+  height: 3.5rem;
+  border-radius: 2rem;
   border: 2px solid white;
   padding-left: 1rem;
-  font-size: 1.2rem;
+  font-size: 1.8rem;
+  color: rgb(54, 54, 54);
 }
 #header > div button {
   border: none;
@@ -40,10 +49,13 @@ input {
   position-anchor: --search-bar;
   position-area: right;
   left: -4.9rem;
-  height: 2.5rem;
-  border-radius: 0 1rem 1rem 0;
-  width: 5rem;
-  background-color: rgb(53, 153, 247);
+  height: 3.5rem;
+  border-radius: 0 2rem 2rem 0;
+  width: 6rem;
+  background-color: rgb(49, 142, 230);
+  font-size: 1.4rem;
+  font-weight: 500;
+  color: white;
 }
 input:focus {
   outline: none;
@@ -71,10 +83,14 @@ input:focus {
   padding-top: 1.3rem;
   align-items: center;
   gap: 0.3rem;
+  transition: all 0.15s ease-in-out;
 
-  background-color: white;
+  background-color: rgba(240, 240, 240, 0.966);
   border-radius: 1rem;
   box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.13);
+}
+.weather-card * {
+  cursor: default;
 }
 .weather-card img {
   grid-area: icon;
@@ -105,8 +121,7 @@ input:focus {
   overflow-x: scroll;
   overflow-y: hidden;
   white-space: nowrap;
-  scrollbar-color: white rgb(156, 215, 243);
-  scrollbar-width: thin;
+  scrollbar-color: white rgba(255, 255, 255, 0);
 }
 #weather-container {
   display: flex;
@@ -116,16 +131,16 @@ input:focus {
 }
 #weather-container > h3 {
   align-self: center;
-  font-size: 1.5rem;
+  font-size: 1.8rem;
 }
 .error {
   font-size: 1.5rem;
-  color: red;
+  color: rgb(233, 231, 231);
   align-self: center;
 }
 .expanded {
-  flex-basis: 350px;
-  height: 350px;
+  flex-basis: 600px;
+  height: 500px;
   display: grid;
   justify-content: space-around;
   grid-template-columns: 1fr 1fr 1fr;
@@ -133,12 +148,18 @@ input:focus {
   grid-template-areas:
     ". icon ."
     ". date ."
-    "downfall windspeed temp";
+    "downfall windspeed temp"
+    "graph graph graph";
 }
 .expanded * {
   justify-self: center;
   align-self: center;
 }
-
-.expanded p {
+.graph {
+  grid-area: graph;
+}
+.loading {
+  font-size: 2rem;
+  color: white;
+  align-self: center;
 }

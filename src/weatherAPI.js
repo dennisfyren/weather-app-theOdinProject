@@ -1,6 +1,7 @@
 import { showWeather, removeChildren } from "./weatherCard.js";
 
 export let weatherData = [];
+export let hourData = [];
 export let city;
 
 export const fetchData = (location) => {
@@ -8,6 +9,14 @@ export const fetchData = (location) => {
   if (city === "") {
     city = "Stockholm";
   }
+  if (document.querySelector("#search-bar").validity.patternMismatch) {
+    showError();
+    return;
+  }
+  const loading = document.createElement("div");
+  loading.textContent = "Loading...";
+  loading.classList.add("loading");
+  document.querySelector("#weather-container").appendChild(loading);
   return fetch(
     `https://weather.visualcrossing.com/VisualCrossingWebServices/rest/services/timeline/${city}?unitGroup=metric&include=days,current,hours&key=W7A96ELHMJTFS3QXDT8Y4YBJ5`,
   )
@@ -15,7 +24,7 @@ export const fetchData = (location) => {
       return response.json();
     })
     .then((data) => {
-      console.log(data);
+      loading.remove();
       city = data.resolvedAddress;
       weatherData = [];
       data.days.forEach((element) => {
@@ -28,6 +37,11 @@ export const fetchData = (location) => {
           element.icon,
           element.hours,
         );
+      });
+      data.days.forEach((element) => {
+        element.hours.forEach((hour) => {
+          hourData[hourData.length] = hour;
+        });
       });
       showWeather(city);
     })
@@ -46,6 +60,7 @@ class weatherDay {
     this.conditions = conditions;
     this.icon = icon;
     this.hours = hours;
+    this.id = crypto.randomUUID();
   }
 }
 function showError() {

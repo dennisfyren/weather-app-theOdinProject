@@ -12,7 +12,7 @@ export const showWeather = (city) => {
   const weatherItem = document.createElement("div");
   weatherContainer.appendChild(weatherItem);
   weatherItem.id = "weather-item";
-  locationDisplay.textContent = city;
+  locationDisplay.textContent = city.charAt(0).toUpperCase() + city.slice(1);
 
   weatherData.forEach((item) => {
     const container = document.createElement("div");
@@ -27,7 +27,20 @@ export const showWeather = (city) => {
       icon.src = imgUrl;
     });
 
-    container.addEventListener("click", () => {
+    function addGraph() {
+      let hourlyTemp = [];
+      let hourlyWind = [];
+      const objInd = weatherData.findIndex((obj) => obj.id === item.id);
+      weatherData[objInd].hours.forEach((hour) => {
+        hourlyTemp[hourlyTemp.length] = hour.temp;
+        const toMs = Math.round((hour.windspeed / 3.6) * 10) / 10;
+        console.log(toMs);
+        hourlyWind[hourlyWind.length] = toMs;
+      });
+      const elements = document.querySelectorAll(".graph");
+      elements.forEach((element) => {
+        element.remove();
+      });
       const children = document.querySelectorAll(".expanded");
       children.forEach((child) => {
         child.classList.remove("expanded");
@@ -43,54 +56,46 @@ export const showWeather = (city) => {
         inline: "center",
       });
       const graph = document.createElement("canvas");
+      graph.classList.add("graph");
       new Chart(graph, {
         type: "line",
         data: {
           labels: [
-            "1",
-            "2",
-            "3",
-            "4",
-            "5",
-            "6",
-            "7",
-            "8",
-            "9",
-            "10",
-            "11",
-            "12",
-            "13",
-            "14",
-            "15",
-            "16",
-            "17",
-            "18",
-            "19",
-            "20",
-            "21",
-            "22",
-            "23",
-            "24",
+            "03.00",
+            "06.00",
+            "09.00",
+            "12.00",
+            "15.00",
+            "18.00",
+            "21.00",
+            "24.00",
           ],
           datasets: [
             {
-              label: "Hourly Temperature",
+              label: "Temperature",
               data: [
-                weatherData[0].hours,
-                weatherData[1].hours,
-                weatherData[2].hours,
-                weatherData[3].hours,
-                weatherData[4].hours,
-                weatherData[5].hours,
-                weatherData[6].hours,
-                weatherData[7].hours,
-                weatherData[8].hours,
-                weatherData[9].hours,
-                weatherData[10].hours,
-                weatherData[11].hours,
-                weatherData[12].hours,
-                weatherData[13].hours,
-                weatherData[14].hours,
+                hourlyTemp[2],
+                hourlyTemp[5],
+                hourlyTemp[8],
+                hourlyTemp[11],
+                hourlyTemp[14],
+                hourlyTemp[17],
+                hourlyTemp[20],
+                hourlyTemp[23],
+              ],
+              borderwidth: 1,
+            },
+            {
+              label: "Windspeed",
+              data: [
+                hourlyWind[2],
+                hourlyWind[5],
+                hourlyWind[8],
+                hourlyWind[11],
+                hourlyWind[14],
+                hourlyWind[17],
+                hourlyWind[20],
+                hourlyWind[23],
               ],
               borderwidth: 1,
             },
@@ -104,9 +109,19 @@ export const showWeather = (city) => {
           },
         },
       });
-      console.log(graph);
+
       container.appendChild(graph);
-    });
+      hourlyTemp = [];
+    }
+
+    container.addEventListener("click", addGraph);
+
+    if (weatherItem.childElementCount === 0) {
+      container.classList.add("expanded");
+      setTimeout(() => {
+        addGraph();
+      }, 100);
+    }
 
     date.textContent = item.dateTime;
     temp.textContent = `${item.temp}°C`;
