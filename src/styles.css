@@ -15,7 +15,8 @@ body {
     "footer footer footer";
   /* background-color: rgb(156, 215, 243); */
   background-image: url("./resources/pexels-jplenio-3131634.jpg");
-  background-size: cover;
+
+  background-color: rgb(66, 66, 66);
   font-family: "Montserrat", sans-serif;
 }
 h2,
@@ -83,7 +84,7 @@ input:focus {
   padding-top: 1.3rem;
   align-items: center;
   gap: 0.3rem;
-  transition: all 0.15s ease-in-out;
+  transition: height 0.15s ease-in-out;
 
   background-color: rgba(240, 240, 240, 0.966);
   border-radius: 1rem;

@@ -24,6 +24,7 @@ export const fetchData = (location) => {
       return response.json();
     })
     .then((data) => {
+      console.log(data);
       loading.remove();
       city = data.resolvedAddress;
       weatherData = [];
@@ -32,7 +33,7 @@ export const fetchData = (location) => {
           element.datetime,
           element.temp,
           element.windspeed,
-          element.snow,
+          element.precip,
           element.conditions,
           element.icon,
           element.hours,

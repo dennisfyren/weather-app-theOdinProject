@@ -34,7 +34,6 @@ export const showWeather = (city) => {
       weatherData[objInd].hours.forEach((hour) => {
         hourlyTemp[hourlyTemp.length] = hour.temp;
         const toMs = Math.round((hour.windspeed / 3.6) * 10) / 10;
-        console.log(toMs);
         hourlyWind[hourlyWind.length] = toMs;
       });
       const elements = document.querySelectorAll(".graph");
